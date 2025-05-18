@@ -6,7 +6,7 @@ use App\Http\Controllers\ProductController;
 Route::view('/', 'welcome');
 
 Route::view('dashboard', 'dashboard')
-    ->middleware(['auth', 'verified'])
+
     ->name('dashboard');
 
 

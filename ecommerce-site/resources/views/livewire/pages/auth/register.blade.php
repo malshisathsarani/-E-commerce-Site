@@ -39,40 +39,52 @@ new #[Layout('layouts.guest')] class extends Component
 <!-- Simple Register Form Without Laravel Blade Components -->
 <div style="max-width: 400px; margin: 40px auto; padding: 24px; border: 1px solid #ddd; border-radius: 8px; background: #fff;">
     <h2 style="text-align:center; margin-bottom: 24px;">Register</h2>
-    <form method="POST" action="/register">
-        <!-- Name -->
-        <div style="margin-bottom: 16px;">
-            <label for="name" style="display:block; margin-bottom: 6px; font-weight: 500;">Name</label>
-            <input id="name" name="name" type="text" required autofocus autocomplete="name"
-                   style="width:100%; padding:8px; border:1px solid #ccc; border-radius:4px;">
-        </div>
+    <form wire:submit.prevent="register">
+    <!-- Name -->
+    <div style="margin-bottom: 16px;">
+        <label for="name" style="display:block; margin-bottom: 6px; font-weight: 500;">Name</label>
+        <input wire:model="name" id="name" name="name" type="text" required autofocus autocomplete="name"
+               style="width:100%; padding:8px; border:1px solid #ccc; border-radius:4px;">
+    </div>
 
-        <!-- Email Address -->
-        <div style="margin-bottom: 16px;">
-            <label for="email" style="display:block; margin-bottom: 6px; font-weight: 500;">Email</label>
-            <input id="email" name="email" type="email" required autocomplete="username"
-                   style="width:100%; padding:8px; border:1px solid #ccc; border-radius:4px;">
-        </div>
+    <!-- Email Address -->
+    <div style="margin-bottom: 16px;">
+        <label for="email" style="display:block; margin-bottom: 6px; font-weight: 500;">Email</label>
+        <input wire:model="email" id="email" name="email" type="email" required autocomplete="username"
+               style="width:100%; padding:8px; border:1px solid #ccc; border-radius:4px;">
+    </div>
 
-        <!-- Password -->
-        <div style="margin-bottom: 16px;">
-            <label for="password" style="display:block; margin-bottom: 6px; font-weight: 500;">Password</label>
-            <input id="password" name="password" type="password" required autocomplete="new-password"
-                   style="width:100%; padding:8px; border:1px solid #ccc; border-radius:4px;">
-        </div>
+    <!-- Password -->
+    <div style="margin-bottom: 16px;">
+        <label for="password" style="display:block; margin-bottom: 6px; font-weight: 500;">Password</label>
+        <input wire:model="password" id="password" name="password" type="password" required autocomplete="new-password"
+               style="width:100%; padding:8px; border:1px solid #ccc; border-radius:4px;">
+    </div>
 
-        <!-- Confirm Password -->
-        <div style="margin-bottom: 16px;">
-            <label for="password_confirmation" style="display:block; margin-bottom: 6px; font-weight: 500;">Confirm Password</label>
-            <input id="password_confirmation" name="password_confirmation" type="password" required autocomplete="new-password"
-                   style="width:100%; padding:8px; border:1px solid #ccc; border-radius:4px;">
-        </div>
+    <!-- Confirm Password -->
+    <div style="margin-bottom: 16px;">
+        <label for="password_confirmation" style="display:block; margin-bottom: 6px; font-weight: 500;">Confirm Password</label>
+        <input wire:model="password_confirmation" id="password_confirmation" name="password_confirmation" type="password" required autocomplete="new-password"
+               style="width:100%; padding:8px; border:1px solid #ccc; border-radius:4px;">
+    </div>
 
-        <div style="display: flex; justify-content: space-between; align-items: center;">
-            <a href="/login" style="font-size: 14px; color: #4F46E5; text-decoration: underline;">Already registered?</a>
-            <button type="submit" style="background: #4F46E5; color: #fff; padding: 8px 20px; border: none; border-radius: 4px; font-weight: 600; cursor: pointer;">
-                Register
-            </button>
+    <!-- Validation Errors -->
+    @if ($errors->any())
+        <div style="color: red; margin-bottom: 16px;">
+            <ul style="margin: 0; padding-left: 16px;">
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
         </div>
-    </form>
+    @endif
+
+    <div style="display: flex; justify-content: space-between; align-items: center;">
+        <a href="/login" style="font-size: 14px; color: #4F46E5; text-decoration: underline;">Already registered?</a>
+        <button type="submit" style="background: #4F46E5; color: #fff; padding: 8px 20px; border: none; border-radius: 4px; font-weight: 600; cursor: pointer;">
+            Register
+        </button>
+    </div>
+</form>
+
 </div>
