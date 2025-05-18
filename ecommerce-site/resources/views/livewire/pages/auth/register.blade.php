@@ -36,53 +36,43 @@ new #[Layout('layouts.guest')] class extends Component
     }
 }; ?>
 
-<div>
-    <form wire:submit="register">
+<!-- Simple Register Form Without Laravel Blade Components -->
+<div style="max-width: 400px; margin: 40px auto; padding: 24px; border: 1px solid #ddd; border-radius: 8px; background: #fff;">
+    <h2 style="text-align:center; margin-bottom: 24px;">Register</h2>
+    <form method="POST" action="/register">
         <!-- Name -->
-        <div>
-            <x-input-label for="name" :value="__('Name')" />
-            <x-text-input wire:model="name" id="name" class="block mt-1 w-full" type="text" name="name" required autofocus autocomplete="name" />
-            <x-input-error :messages="$errors->get('name')" class="mt-2" />
+        <div style="margin-bottom: 16px;">
+            <label for="name" style="display:block; margin-bottom: 6px; font-weight: 500;">Name</label>
+            <input id="name" name="name" type="text" required autofocus autocomplete="name"
+                   style="width:100%; padding:8px; border:1px solid #ccc; border-radius:4px;">
         </div>
 
         <!-- Email Address -->
-        <div class="mt-4">
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input wire:model="email" id="email" class="block mt-1 w-full" type="email" name="email" required autocomplete="username" />
-            <x-input-error :messages="$errors->get('email')" class="mt-2" />
+        <div style="margin-bottom: 16px;">
+            <label for="email" style="display:block; margin-bottom: 6px; font-weight: 500;">Email</label>
+            <input id="email" name="email" type="email" required autocomplete="username"
+                   style="width:100%; padding:8px; border:1px solid #ccc; border-radius:4px;">
         </div>
 
         <!-- Password -->
-        <div class="mt-4">
-            <x-input-label for="password" :value="__('Password')" />
-
-            <x-text-input wire:model="password" id="password" class="block mt-1 w-full"
-                            type="password"
-                            name="password"
-                            required autocomplete="new-password" />
-
-            <x-input-error :messages="$errors->get('password')" class="mt-2" />
+        <div style="margin-bottom: 16px;">
+            <label for="password" style="display:block; margin-bottom: 6px; font-weight: 500;">Password</label>
+            <input id="password" name="password" type="password" required autocomplete="new-password"
+                   style="width:100%; padding:8px; border:1px solid #ccc; border-radius:4px;">
         </div>
 
         <!-- Confirm Password -->
-        <div class="mt-4">
-            <x-input-label for="password_confirmation" :value="__('Confirm Password')" />
-
-            <x-text-input wire:model="password_confirmation" id="password_confirmation" class="block mt-1 w-full"
-                            type="password"
-                            name="password_confirmation" required autocomplete="new-password" />
-
-            <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
+        <div style="margin-bottom: 16px;">
+            <label for="password_confirmation" style="display:block; margin-bottom: 6px; font-weight: 500;">Confirm Password</label>
+            <input id="password_confirmation" name="password_confirmation" type="password" required autocomplete="new-password"
+                   style="width:100%; padding:8px; border:1px solid #ccc; border-radius:4px;">
         </div>
 
-        <div class="flex items-center justify-end mt-4">
-            <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('login') }}" wire:navigate>
-                {{ __('Already registered?') }}
-            </a>
-
-            <x-primary-button class="ms-4">
-                {{ __('Register') }}
-            </x-primary-button>
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+            <a href="/login" style="font-size: 14px; color: #4F46E5; text-decoration: underline;">Already registered?</a>
+            <button type="submit" style="background: #4F46E5; color: #fff; padding: 8px 20px; border: none; border-radius: 4px; font-weight: 600; cursor: pointer;">
+                Register
+            </button>
         </div>
     </form>
 </div>

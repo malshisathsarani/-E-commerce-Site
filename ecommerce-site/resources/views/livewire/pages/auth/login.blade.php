@@ -24,48 +24,38 @@ new #[Layout('layouts.guest')] class extends Component
     }
 }; ?>
 
-<div>
-    <!-- Session Status -->
-    <x-auth-session-status class="mb-4" :status="session('status')" />
-
-    <form wire:submit="login">
+<!-- Simple Login Form Without Laravel Blade Components -->
+<div style="max-width: 400px; margin: 40px auto; padding: 24px; border: 1px solid #ddd; border-radius: 8px; background: #fff;">
+    <h2 style="text-align:center; margin-bottom: 24px;">Login</h2>
+    <!-- Display session status or error messages here if needed -->
+    <form method="POST" action="/login">
         <!-- Email Address -->
-        <div>
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input wire:model="form.email" id="email" class="block mt-1 w-full" type="email" name="email" required autofocus autocomplete="username" />
-            <x-input-error :messages="$errors->get('form.email')" class="mt-2" />
+        <div style="margin-bottom: 16px;">
+            <label for="email" style="display:block; margin-bottom: 6px; font-weight: 500;">Email</label>
+            <input id="email" name="email" type="email" required autofocus autocomplete="username"
+                   style="width:100%; padding:8px; border:1px solid #ccc; border-radius:4px;">
         </div>
 
         <!-- Password -->
-        <div class="mt-4">
-            <x-input-label for="password" :value="__('Password')" />
-
-            <x-text-input wire:model="form.password" id="password" class="block mt-1 w-full"
-                            type="password"
-                            name="password"
-                            required autocomplete="current-password" />
-
-            <x-input-error :messages="$errors->get('form.password')" class="mt-2" />
+        <div style="margin-bottom: 16px;">
+            <label for="password" style="display:block; margin-bottom: 6px; font-weight: 500;">Password</label>
+            <input id="password" name="password" type="password" required autocomplete="current-password"
+                   style="width:100%; padding:8px; border:1px solid #ccc; border-radius:4px;">
         </div>
 
         <!-- Remember Me -->
-        <div class="block mt-4">
-            <label for="remember" class="inline-flex items-center">
-                <input wire:model="form.remember" id="remember" type="checkbox" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" name="remember">
-                <span class="ms-2 text-sm text-gray-600">{{ __('Remember me') }}</span>
+        <div style="margin-bottom: 16px;">
+            <label style="display: flex; align-items: center;">
+                <input id="remember" name="remember" type="checkbox" style="margin-right: 8px;">
+                <span style="font-size: 14px; color: #555;">Remember me</span>
             </label>
         </div>
 
-        <div class="flex items-center justify-end mt-4">
-            @if (Route::has('password.request'))
-                <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('password.request') }}" wire:navigate>
-                    {{ __('Forgot your password?') }}
-                </a>
-            @endif
-
-            <x-primary-button class="ms-3">
-                {{ __('Log in') }}
-            </x-primary-button>
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+            <a href="/forgot-password" style="font-size: 14px; color: #4F46E5; text-decoration: underline;">Forgot your password?</a>
+            <button type="submit" style="background: #4F46E5; color: #fff; padding: 8px 20px; border: none; border-radius: 4px; font-weight: 600; cursor: pointer;">
+                Log in
+            </button>
         </div>
     </form>
 </div>
